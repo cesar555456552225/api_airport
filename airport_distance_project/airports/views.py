@@ -69,11 +69,6 @@ def calculate_distance(request):
                     "success":False,
                     "error":"uno o ambo codigo son invalidos"
                 })
-            elif:
-                return JsonResponse({
-                    "success":False,
-                    "error":"Uno o ambos codigos de aeropuerto no son validos"
-                })
             else:
                 return JsonResponse({
                     "success": False,
