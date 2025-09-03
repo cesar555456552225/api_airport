@@ -13,7 +13,7 @@ def airport_distance_view(request):
 @csrf_exempt
 
 def calculate_distance(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         try:
             aeropuerto_origen = request.POST.get('aeropuerto_origen', '').strip().upper()
             aeropuerto_destino = request.POST.get('aeropuerto_destino', '').strip().upper()
@@ -56,7 +56,7 @@ def calculate_distance(request):
                     },
                     'aeropuerto_destino':{
                         'nombre':datos["data"]["attributes"]["to_airport"]["name"],
-                        'ciudad':datos["data"]["attributes"]["to_airport"]["name"],
+                        'ciudad':datos["data"]["attributes"]["to_airport"]["city"],
                         'codigo':aeropuerto_destino
                     },
                     "distancia_km":datos["data"]["attributes"]["kilometers"],
@@ -72,9 +72,9 @@ def calculate_distance(request):
             else:
                 return JsonResponse({
                     "success": False,
-                    "error": f"Error den la api: {response_post.status_code}"
+                    "error": f"Error de la api: {response_post.status_code}"
                 })
-        except request.exceptions.Timeout:
+        except requests.exceptions.Timeout:
             return JsonResponse({
                 "success":False,
                 "error": "Tiempo de espera agotado. intente nuevamente."
